@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const Pusher = require('pusher');
 const dbModel = require('./dbModel.js');
 
-// app config
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -16,11 +15,11 @@ const pusher = new Pusher({
 	useTLS: true
 });
 
-// middleware
+
 app.use(express.json());
 app.use(cors());
 
-// DB config
+
 const connection_url = 'mongodb+srv://master:pcStTUglw1ZkokCU@cluster0.r5wbt.mongodb.net/instaDB?retryWrites=true&w=majority';
 mongoose.connect(connection_url, {
 	useCreateIndex: true,
@@ -54,10 +53,8 @@ mongoose.connection.once('open', () => {
 	});
 });
 
-// API routes
+
 app.get('/', (req, res) => res.status(200).send('Hello world'));
-
-
 
 app.post('/upload', (req, res) => {
 	const body = req.body;
@@ -83,8 +80,6 @@ app.get('/sync', (req, res) => {
 	});
 });
 
-
-// listener
 app.listen(port, () => console.log(`Listening on localhost:${port}`));
 
 
